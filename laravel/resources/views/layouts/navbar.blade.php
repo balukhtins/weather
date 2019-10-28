@@ -13,7 +13,7 @@
                 <a class="nav-link" href="#">Сообщения пользователей</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Оставить сообщение</a>
+                <a class="nav-link" href="{!! route('messages.create') !!}">Оставить сообщение</a>
             </li>
         </ul>
     </div>

@@ -16,7 +16,16 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+
+        $messages = Message::all();
+        /*$user=$messages->user_id;
+        dd($user);*/
+
+        return view('messages.index',
+        [
+            'messages'=>$messages,
+            'header'=>'Сообщения пользователей',
+        ]);
     }
 
     /**
@@ -40,7 +49,7 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $request=request()->message;
-       $userId=Auth::id();
+        $userId=Auth::id();
         $user = User::find($userId);
         $user->messages()->create([
             'messages'=>$request,

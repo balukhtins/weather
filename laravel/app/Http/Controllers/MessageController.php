@@ -16,15 +16,18 @@ class MessageController extends Controller
      */
     public function index()
     {
+        $messages = Message::with('users')->get();
+        /*$users=User::with(['messages' => function($q){
+            $q->orderBy('created_at','desc');
+        }])->paginate(10);*/
 
-        $messages = Message::all();
-        /*$user=$messages->user_id;
-        dd($user);*/
+        dd($messages);
 
         return view('messages.index',
         [
             'messages'=>$messages,
             'header'=>'Сообщения пользователей',
+            /*'users'=>$users*/
         ]);
     }
 

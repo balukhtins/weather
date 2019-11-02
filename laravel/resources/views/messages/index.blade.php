@@ -6,9 +6,15 @@
         <div class="row">
             @foreach($messages as $message)
                 <div class="container">
-                    <p>{{ $message->users->name }}  </p>
+                    <fieldset>
+                        @foreach($users as $user)
+                            @if($user->id == $message->user_id)
+                                <b>{{ $user->name }}</b>
+                            @endif
+                        @endforeach
                     <p>{{ $message->messages }}</p>
-                <hr>
+                    </fieldset>
+                    <hr>
                 </div>
 
             @endforeach

@@ -16,18 +16,19 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::with('users')->get();
+        $messages = Message::orderBy('created_at', 'desc')->paginate(5);
+        $users = User::all();
         /*$users=User::with(['messages' => function($q){
             $q->orderBy('created_at','desc');
         }])->paginate(10);*/
 
-        dd($messages);
+         //dd($messages);
 
         return view('messages.index',
         [
             'messages'=>$messages,
             'header'=>'Сообщения пользователей',
-            /*'users'=>$users*/
+            'users'=>$users,
         ]);
     }
 
@@ -39,7 +40,7 @@ class MessageController extends Controller
     public function create(Request $request)
     {
         return view('messages.create',[
-            'header'=>'create message'
+            'header'=>'Добавление сообщений'
         ]);
     }
 
@@ -52,13 +53,17 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $request=request()->message;
+
+        if (!empty($request)){
         $userId=Auth::id();
         $user = User::find($userId);
         $user->messages()->create([
             'messages'=>$request,
             'user_id'=>$user->id
         ]);
-       return redirect()->route('parsing');
+       return redirect()->route('messages.index');
+        }
+        return redirect()->back()->with(['msg' => 'Текстовое поле должно быть заполнено!']);
     }
 
     /**

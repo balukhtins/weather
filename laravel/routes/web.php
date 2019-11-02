@@ -19,13 +19,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['middleware'=>['auth']], function(){
+    Route::get('/', ['uses'=>'WeatherController@parse','as' => 'parsing']);
+    Route::resource('messages', 'MessageController');
+});
+/*Route::get('/', ['uses'=>'WeatherController@parse','as' => 'parsing'])->middleware('auth');*/
 
-Route::get('/', ['uses'=>'WeatherController@parse','as' => 'parsing'])->middleware('auth');
 
 
 
 
-
-Route::resource('messages', 'MessageController');
+/*Route::resource('messages', 'MessageController');*/
 
 

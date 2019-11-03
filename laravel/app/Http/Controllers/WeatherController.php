@@ -42,7 +42,6 @@ class WeatherController extends Controller
                 ['head'=>$head],
                 ['body'=>$body]
             );
-           // dd($head);
         }
     }
 }

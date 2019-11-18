@@ -14,21 +14,13 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Message $messages)
     {
-        $messages = Message::orderBy('created_at', 'desc')->paginate(5);
-        $users = User::all();
-        /*$users=User::with(['messages' => function($q){
-            $q->orderBy('created_at','desc');
-        }])->paginate(10);*/
-
-         //dd($messages);
-
         return view('messages.index',
         [
-            'messages'=>$messages,
+            'messages'=>$messages->with('user')->orderBy('created_at', 'desc')->paginate(5),
             'header'=>'Сообщения пользователей',
-            'users'=>$users,
+            /*'users'=>$users,*/
         ]);
     }
 

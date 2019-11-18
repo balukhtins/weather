@@ -7,26 +7,12 @@
             @foreach($messages as $message)
                 <div class="container">
                     <fieldset>
-                        @foreach($users as $user)
-                            @if($user->id == $message->user_id)
-                                <b>{{ $user->name }}</b>
-                            @endif
-                        @endforeach
+                    <b>{{ $message->user->name }}</b>
                     <p>{{ $message->messages }}</p>
                     </fieldset>
                     <hr>
                 </div>
-
             @endforeach
-
-            {{--@foreach($users as $user)
-                <div class="container">
-                <h3>{{ $user->name }}</h3>
-                @foreach($user->messages as $message)
-                <div>{{ $message->messages }}</div>
-                @endforeach
-                </div>
-            @endforeach--}}
         </div>
         {{ $messages->links() }}
     </div>

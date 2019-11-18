@@ -17,10 +17,10 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware'=>['auth']], function(){
-    Route::get('/', ['uses'=>'WeatherController@parse','as' => 'parsing']);
+    Route::get('/', ['uses'=>'WeatherController@parse'])->name('parsing');
     Route::resource('messages', 'MessageController');
 });
 

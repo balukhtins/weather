@@ -1,5 +1,5 @@
-{!! $head !!}
+{{--{!! $head !!}--}}
 
 @include('layouts.navbar')
 
-{!! $body !!}
+ <div {!! $body !!}

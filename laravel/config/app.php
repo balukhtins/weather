@@ -228,4 +228,6 @@ return [
 
     ],
 
+    'gismeteo_url' => env('GISMETEO_URL', 'https://www.gismeteo.ua/weather-zaporizhia-5093/now/ ')
+
 ];

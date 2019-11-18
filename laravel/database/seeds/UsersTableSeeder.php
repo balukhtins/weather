@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use  App\User;
 use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
@@ -14,14 +15,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('users')->insert([
-                'name' => $faker->name,
-                'surname' => $faker->name,
-                'email' => $faker->unique()->email,
-                'password' => bcrypt('123456789'),
+        factory(User::class)->create([
+            'email' => 'test@test.com',
+            'password' => bcrypt('123456789')
+        ]);
 
-            ]);
-        }
+        factory(User::class, 10)->create();
+
     }
 }
+

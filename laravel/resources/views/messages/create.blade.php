@@ -2,9 +2,9 @@
 @extends('layouts.index')
 
 @section('content')
-    @if(session('msg'))
+    @if(count($errors)>0)
         <div class="alert alert-danger">
-            {{ session ('msg') }}
+            {{ $errors->first() }}
         </div>
     @endif
 <form class="col-12" method="post" action="{{ route('messages.store') }}">

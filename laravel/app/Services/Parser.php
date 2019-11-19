@@ -32,7 +32,7 @@ class Parser
            /* preg_match_all('&<body.*?>.+&xus',$result,$body);*/
             /*preg_match_all('&.*<body.*?>&xus',$result,$head);*/
 
-            preg_match_all('&class="forecast_wrap.+?</a>&xus',$result,$body);
+            preg_match_all('&class="forecast_wrap.+?__frame&xus',$result,$body);
 
            // dd($body);
 

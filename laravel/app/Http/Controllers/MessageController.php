@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogPost;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,6 @@ class MessageController extends Controller
         [
             'messages'=>$messages->with('user')->orderBy('created_at', 'desc')->paginate(5),
             'header'=>'Сообщения пользователей',
-            /*'users'=>$users,*/
         ]);
     }
 
@@ -42,20 +42,17 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBlogPost $request)
     {
-        $request=request()->message;
+        $validated = $request->validated();
 
-        if (!empty($request)){
-        $userId=Auth::id();
-        $user = User::find($userId);
+        $user = User::find(Auth::id());
+        //dd($user);
         $user->messages()->create([
-            'messages'=>$request,
+            'messages'=>$request->message,
             'user_id'=>$user->id
         ]);
        return redirect()->route('messages.index');
-        }
-        return redirect()->back()->with(['msg' => 'Текстовое поле должно быть заполнено!']);
     }
 
     /**

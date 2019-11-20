@@ -14,7 +14,8 @@ class WeatherController extends Controller
         return view('layouts.home',
             [
                 'header' => '',
-                'body' => $parse[0][0][0]
+                'body' => $parse[0][0],
+
             ]
         );
     }

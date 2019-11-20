@@ -19,35 +19,19 @@ class Parser
 
         if ($result === false) {
             echo "Ошибка CURL: " . curl_error($ch);
-            curl_close($ch);
             return false;
-        } else {
-
-            curl_close($ch);
-
-            $result = str_replace('location.href', '', $result);
-            $result = str_replace('window.location', '', $result);
-            $result = str_replace('https://www.gismeteo.ua/page/agreement/', 'localhost', $result);
-
-           /* preg_match_all('&<body.*?>.+&xus',$result,$body);*/
-            /*preg_match_all('&.*<body.*?>&xus',$result,$head);*/
-
-            preg_match_all('&class="forecast_wrap.+?__frame&xus',$result,$body);
-
-           // dd($body);
-
-            /*$head = $head[0][0];*/
-            /*$head = preg_replace('#<head>#','<head>
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">',$head);
-*/
-            /*$body = preg_replace('&<body.*?>(.+)&xus', '$1', $body[0][0]);*/
-
-            return
-                [
-                /*$head,*/
-                $body
-                ]
-            ;
         }
+        else {
+                $result = str_replace('location.href', '', $result);
+                $result = str_replace('window.location', '', $result);
+                $result = str_replace('https://www.gismeteo.ua/page/agreement/', 'localhost', $result);
+
+                preg_match_all('&class="forecast_wrap.+?__frame&xus',$result,$body);
+
+           // dd($style);
+
+                return $body;
+                }
+        curl_close($ch);
     }
 }

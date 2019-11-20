@@ -14,12 +14,11 @@ class Parser
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, false);
         $result = curl_exec($ch);
-        //curl_close($ch);
+
 
 
         if ($result === false) {
-            echo "Ошибка CURL: " . curl_error($ch);
-            return false;
+            abort(404);
         }
         else {
                 $result = str_replace('location.href', '', $result);
